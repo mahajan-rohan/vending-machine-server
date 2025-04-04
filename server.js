@@ -44,6 +44,13 @@ io.on("connection", (socket) => {
     io.to(patientId).emit("call-ended");
   });
 
+  socket.on("prescribe-medicines", (medicines) => {
+    // Emit the prescribed medicines to the vending machine interface
+    console.log("Medicines prescribed: ", medicines);
+    // Send to vending machine interface (or handle in your app as needed)
+    socket.broadcast.emit("new-prescribed-medicines", medicines);
+  });
+
   socket.on("disconnect", () => {
     console.log("Client disconnected");
   });
